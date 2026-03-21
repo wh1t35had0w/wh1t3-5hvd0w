@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Devops on Wh1t35shvd0w</title>
-    <link>//localhost:1313/tags/devops/</link>
+    <link>http://localhost:1313/wh1t3-5hvd0w/tags/devops/</link>
     <description>Recent content in Devops on Wh1t35shvd0w</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 21 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/wh1t3-5hvd0w/tags/devops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How I Deployed My Blog on GitHub Pages Using Hugo</title>
-      <link>//localhost:1313/posts/deploying-hugo-blog-on-github-pages/</link>
+      <link>http://localhost:1313/wh1t3-5hvd0w/posts/deploying-hugo-blog-on-github-pages/</link>
       <pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/posts/deploying-hugo-blog-on-github-pages/</guid>
+      <guid>http://localhost:1313/wh1t3-5hvd0w/posts/deploying-hugo-blog-on-github-pages/</guid>
       <description>&lt;p&gt;So you want a blog. Not just any blog — a fast, free, fully custom one that you actually own.&#xA;That is exactly what I built, and in this post I will walk you through every step I took to&#xA;get this site live on GitHub Pages using Hugo.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-hugo&#34;&gt;What is Hugo?&lt;/h2&gt;&#xA;&lt;p&gt;Hugo is a static site generator. Instead of a heavy CMS like WordPress, Hugo takes your&#xA;content written in simple Markdown files and converts them into a full website in milliseconds.&#xA;No database. No server. Just fast, clean HTML.&lt;/p&gt;</description>
     </item>
   </channel>

@@ -1,5 +1,3 @@
-mkdir -p layouts/report-phishing
-cat > layouts/report-phishing/list.html << 'EOF'
 {{ define "main" }}
 <div id="hack-screen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:monospace;">
 
@@ -118,4 +116,3 @@ function typeStep() {
 
 typeStep();
 </script>
-{{ end }}
