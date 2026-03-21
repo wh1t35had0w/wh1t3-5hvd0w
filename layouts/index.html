@@ -29,7 +29,7 @@
         <a href="{{ .Permalink }}" style="text-decoration:none;">
           <div style="background:#0d1117;border:1px solid #1e2a3a;border-radius:12px;padding:20px;display:flex;gap:20px;align-items:flex-start;transition:all 0.3s;" onmouseover="this.style.borderColor='#667eea'" onmouseout="this.style.borderColor='#1e2a3a'">
             {{ with .Params.image }}
-            <img src="{{ . }}" style="width:120px;height:80px;object-fit:cover;border-radius:8px;flex-shrink:0;" />
+            <img src="{{ . }}" style="width:150px;height:150px;object-fit:cover;border-radius:8px;flex-shrink:0;" />
             {{ else }}
             <div style="width:120px;height:80px;background:linear-gradient(135deg,#1a1a3e,#2a2a5e);border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.8rem;">💻</div>
             {{ end }}
