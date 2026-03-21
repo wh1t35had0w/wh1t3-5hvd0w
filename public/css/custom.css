@@ -1,0 +1,150 @@
+/* Matrix/Hacking background canvas */
+#matrix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.13;
+}
+
+/* Floating profile image animation */
+.avatar img, img[src*="profile"] {
+  animation: float 3s ease-in-out infinite;
+  border-radius: 50%;
+  border: 3px solid #00ff88;
+  box-shadow: 0 0 20px #00ff88;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Hide scrollbar but keep scrolling */
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Static sticky footer */
+footer {
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(13, 17, 23, 0.85) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Add padding so content doesn't hide behind footer */
+body {
+  padding-bottom: 60px;
+}
+
+/* Thin locked footer */
+footer {
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  height: 32px !important;
+  padding: 0 20px !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(13, 17, 23, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border-top: 1px solid #1e2a3a;
+  font-size: 0.72rem !important;
+}
+
+footer * {
+  font-size: 0.72rem !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body {
+  padding-bottom: 32px;
+}
+
+/* Thin locked footer */
+footer {
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  height: 32px !important;
+  padding: 0 20px !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(13, 17, 23, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border-top: 1px solid #1e2a3a;
+  font-size: 0.72rem !important;
+}
+
+footer * {
+  font-size: 0.72rem !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body {
+  padding-bottom: 32px;
+}
+
+/* Force TOC to stay inside container */
+nav#TableOfContents,
+#TableOfContents {
+  position: static !important;
+  float: none !important;
+  width: auto !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;
+  z-index: auto !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+}
+
+#TableOfContents ul {
+  list-style: none !important;
+  padding-left: 16px !important;
+  margin: 0 !important;
+}
+
+#TableOfContents > ul {
+  padding-left: 0 !important;
+}
+
+#TableOfContents a {
+  color: #8892a4 !important;
+  text-decoration: none !important;
+  font-family: monospace !important;
+  font-size: 0.83rem !important;
+  line-height: 2 !important;
+}
+
+#TableOfContents a:hover {
+  color: #667eea !important;
+}

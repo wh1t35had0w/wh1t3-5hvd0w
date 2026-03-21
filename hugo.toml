@@ -1,0 +1,46 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "Wh1t35shvd0w"
+theme = "nomad-tech"
+disableLanguages = ["zh", "fr"]
+
+[params]
+  description = "My personal blog"
+  author = "Dennis Thiong'o"
+  subtitle = "Tech Explorer • Cybersecurity Enthusiast • Problem Solver"
+  avatar = "/images/profile.jpg"
+  disableLanguageSwitcher = true
+
+  [[params.contact]]
+    name = "email"
+    value = "your@email.com"
+
+  [[params.contact]]
+    name = "github"
+    value = "yourhandle"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    name = "Social Media"
+    url = "/social/"
+    weight = 2
+
+  [[menu.main]]
+    name = "Blog"
+    url = "/posts/"
+    weight = 3
+
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 4
+
+  [[menu.main]]
+    name = "Tech Journey"
+    url = "/travel/"
+    weight = 5
