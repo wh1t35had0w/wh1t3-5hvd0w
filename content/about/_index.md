@@ -16,28 +16,17 @@ My mission is simple — **make the digital world harder to compromise**. I beli
 
 ## ls -la skills/
 
-**Offensive Security** — Penetration Testing, Ethical Hacking, CTF Competitions, Vulnerability Assessment, Social Engineering
+**Offensive Security** — Penetration Testing, Ethical Hacking, CTF Competitions, Vulnerability Assessment
 
-**Networking** — Network Engineering, Infrastructure Design, Firewall Configuration, VPN, TCP/IP
+**Networking** — Network Engineering, Infrastructure Design, Firewall Configuration, TCP/IP
 
-**Identity Security** — CyberArk, Identity & Access Management, Privileged Access
+**Identity Security** — CyberArk, Identity and Access Management, Privileged Access
 
 **Infrastructure** — VMware vSphere, Virtualisation, System Administration, IT Support
 
 **Development** — Python, Bash Scripting, Web Development, Hugo
 
 **Design** — Figma, Adobe Suite, UI/UX, Graphic Design
-
-## cat tools.json
-```
-{
-  "offensive": ["Kali Linux", "Metasploit", "Burp Suite", "Nmap", "Wireshark"],
-  "cracking":  ["Hashcat", "John the Ripper"],
-  "infra":     ["VMware vSphere", "VirtualBox", "CyberArk"],
-  "design":    ["Figma", "Adobe Photoshop", "Adobe Illustrator"],
-  "scripting": ["Python", "Bash", "PowerShell"]
-}
-```
 
 ## grep -r "certifications" ./
 

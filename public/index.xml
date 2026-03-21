@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Wh1t35shvd0w</title>
-    <link>http://localhost:1313/wh1t3-5hvd0w/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on Wh1t35shvd0w</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>your@email.com (Dennis Thiong&#39;o)</managingEditor>
     <webMaster>your@email.com (Dennis Thiong&#39;o)</webMaster>
-    <lastBuildDate>Sat, 21 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/wh1t3-5hvd0w/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 21 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How I Deployed My Blog on GitHub Pages Using Hugo</title>
-      <link>http://localhost:1313/wh1t3-5hvd0w/posts/deploying-hugo-blog-on-github-pages/</link>
+      <link>http://localhost:1313/posts/deploying-hugo-blog-on-github-pages/</link>
       <pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate>
        <author>your@email.com (Dennis Thiong&#39;o)</author>
-      <guid>http://localhost:1313/wh1t3-5hvd0w/posts/deploying-hugo-blog-on-github-pages/</guid>
+      <guid>http://localhost:1313/posts/deploying-hugo-blog-on-github-pages/</guid>
       <description>&lt;p&gt;So you want a blog. Not just any blog, a fast, free, fully custom one that you actually own.
 That is exactly what I built, and in this post I will walk you through every step I took to
 get this site live on GitHub Pages using Hugo.&lt;/p&gt;

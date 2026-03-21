@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>About on Wh1t35shvd0w</title>
-    <link>http://localhost:1313/wh1t3-5hvd0w/about/</link>
+    <link>http://localhost:1313/about/</link>
     <description>Recent content in About on Wh1t35shvd0w</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/wh1t3-5hvd0w/about/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/about/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

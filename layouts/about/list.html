@@ -1,50 +1,60 @@
 {{ define "main" }}
-{{ range .Pages }}
-<div class="terminal-container" style="max-width:860px;margin:60px auto;padding:0 20px;">
-  <div style="background:#1a1a2e;border:1px solid #2a2a4e;border-radius:14px;overflow:hidden;">
-
-    <!-- Terminal top bar -->
-    <div style="background:#0d1117;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #2a2a4e;">
-      <span style="width:12px;height:12px;border-radius:50%;background:#ff5f57;display:inline-block;"></span>
-      <span style="width:12px;height:12px;border-radius:50%;background:#febc2e;display:inline-block;"></span>
-      <span style="width:12px;height:12px;border-radius:50%;background:#28c840;display:inline-block;"></span>
-      <span style="font-family:monospace;font-size:0.8rem;color:#666;margin-left:8px;">About Me.md</span>
+<div class="about-container">
+  <article class="about-content">
+    <div class="terminal-header">
+      <div class="terminal-buttons">
+        <span class="btn-close"></span>
+        <span class="btn-minimize"></span>
+        <span class="btn-maximize"></span>
+      </div>
+      <div class="terminal-title">about.md</div>
     </div>
-
-    <!-- Terminal body -->
-    <div style="padding:28px 32px;font-family:monospace;">
-
-      <!-- Command line -->
-      <p style="color:#00ff88;margin:0 0 24px;">$ cat About Me.md</p>
-
-      <!-- Profile Image -->
-      <div style="margin-bottom:28px;">
-        <img src="{{ $.Site.BaseURL }}images/profile.png"
-          onerror="this.style.display='none'"
-          style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid #667eea;box-shadow:0 0 20px rgba(102,126,234,0.3);" />
+    <div class="terminal-body">
+      <div class="prompt-line">
+        <span class="prompt">$</span>
+        <span class="command">cat about.md</span>
       </div>
 
-      <!-- Content -->
-      <div style="color:#ccc;line-height:1.9;font-size:0.92rem;" class="about-content">
+      <!-- Profile Image -->
+      <div style="margin:20px 0;display:flex;align-items:center;gap:20px;">
+        <img src="{{ "/images/profile.png" | absURL }}"
+          style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid #667eea;box-shadow:0 0 20px rgba(102,126,234,0.3);" />
+        <div>
+          <h2 style="color:#fff;margin:0 0 6px;">Wh1t3 5hvd0w</h2>
+          <p style="color:#667eea;margin:0 0 12px;font-size:0.9rem;">Ethical Hacker • CTF Player • Network Engineer</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="padding:3px 10px;background:#1a1a2e;border:1px solid #667eea;color:#667eea;border-radius:20px;font-size:0.72rem;">🌍 Nairobi, Kenya</span>
+            <span style="padding:3px 10px;background:#1a1a2e;border:1px solid #00ff88;color:#00ff88;border-radius:20px;font-size:0.72rem;">⚡ Early 20s</span>
+            <span style="padding:3px 10px;background:#1a1a2e;border:1px solid #a78bfa;color:#a78bfa;border-radius:20px;font-size:0.72rem;">🔐 Offensive Security</span>
+            <span style="padding:3px 10px;background:#1a1a2e;border:1px solid #f6ad55;color:#f6ad55;border-radius:20px;font-size:0.72rem;">🏆 CTF Player</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
         {{ .Content }}
       </div>
 
+      <!-- Tools -->
+      <div style="margin-top:24px;">
+        <p style="color:#00ff88;margin:0 0 12px;font-size:0.85rem;">$ ls /tools --color</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;">
+          {{ $tools := slice "Kali Linux" "Metasploit" "Burp Suite" "Nmap" "Wireshark" "Hashcat" "John the Ripper" "VMware vSphere" "CyberArk" "Python" "Bash" "Figma" "Adobe Suite" "VirtualBox" }}
+          {{ range $tools }}
+          <div style="background:#161b22;border:1px solid #2a2a4e;border-radius:8px;padding:8px 12px;text-align:center;font-size:0.75rem;color:#ccc;cursor:default;transition:all 0.3s;" onmouseover="this.style.borderColor='#667eea';this.style.color='#667eea'" onmouseout="this.style.borderColor='#2a2a4e';this.style.color='#ccc'">{{ . }}</div>
+          {{ end }}
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div style="margin-top:24px;padding:14px;background:#161b22;border-radius:8px;border:1px solid #2a2a4e;">
+        <p style="color:#00ff88;margin:0 0 8px;font-size:0.85rem;">$ systemctl status wh1t3-5hvd0w</p>
+        <p style="color:#28c840;margin:0;font-size:0.82rem;">● Active: <strong>running</strong> since birth</p>
+        <p style="color:#666;margin:4px 0 0 18px;font-size:0.78rem;">Main PID: 1337 | Tasks: ∞ | Memory: Expanding</p>
+        <p style="color:#666;margin:4px 0 0 18px;font-size:0.78rem;">Status: "Breaking things legally. Building things securely."</p>
+      </div>
+
     </div>
-  </div>
+  </article>
 </div>
-{{ end }}
-
-<style>
-.about-content h1 { color:#667eea; font-size:1.5rem; margin:0 0 16px; }
-.about-content h2 { color:#00ff88; font-size:1.1rem; margin:28px 0 10px; }
-.about-content h3 { color:#a78bfa; font-size:1rem; margin:20px 0 8px; }
-.about-content p  { margin-bottom:14px; }
-.about-content strong { color:#a78bfa; }
-.about-content ul { padding-left:20px; margin-bottom:14px; }
-.about-content li { margin-bottom:6px; }
-.about-content code { background:#0d1117; color:#00ff88; padding:2px 8px; border-radius:4px; }
-.about-content pre { background:#0d1117; border:1px solid #1e2a3a; border-radius:8px; padding:16px; overflow-x:auto; margin:16px 0; }
-.about-content pre code { background:none; padding:0; }
-</style>
-
 {{ end }}
