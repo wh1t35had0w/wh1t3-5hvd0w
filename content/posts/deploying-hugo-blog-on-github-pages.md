@@ -7,7 +7,7 @@ description: "A step by step guide on how I built and deployed this blog using H
 image: "https://wh1t35had0w.github.io/wh1t3-5hvd0w/images/hugo-blog.png"
 ---
 
-So you want a blog. Not just any blog — a fast, free, fully custom one that you actually own.
+So you want a blog. Not just any blog, a fast, free, fully custom one that you actually own.
 That is exactly what I built, and in this post I will walk you through every step I took to
 get this site live on GitHub Pages using Hugo.
 
@@ -144,12 +144,12 @@ jobs:
 
 ## Step 10 — Enable GitHub Pages
 
-Go to your repository on GitHub → **Settings** → **Pages** → set source to
+Go to your repository on GitHub **Settings** - > **Pages** → set source to
 **GitHub Actions** → Save.
 
 ## You Are Live
 
-After the Action runs — usually under a minute — your blog will be live at:
+After the Action runs, usually under a minute, your blog will be live at:
 ```
 https://yourusername.github.io/your-repo/
 ```
