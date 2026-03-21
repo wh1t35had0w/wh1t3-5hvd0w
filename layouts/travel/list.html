@@ -1,27 +1,24 @@
 {{ define "main" }}
 <div style="max-width:800px;margin:60px auto;padding:0 20px;">
   <h1 style="text-align:center;font-size:2.5rem;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;">My Tech Journey</h1>
-  <p style="text-align:center;color:#aaa;margin-bottom:50px;">From curiosity to career — my path in tech</p>
-
+  <p style="text-align:center;color:#aaa;margin-bottom:50px;">From curiosity to career,my path in tech</p>
   <div style="position:relative;padding-left:40px;border-left:2px solid #667eea;">
-
     {{ $items := slice
-      (dict "icon" "🌱" "period" "2018 - 2019" "title" "The Beginning" "desc" "Discovered my passion for technology and started learning programming basics" "tags" (slice "Python" "HTML" "Curiosity"))
-      (dict "icon" "💻" "period" "2019 - 2020" "title" "First Steps" "desc" "Built my first projects and started understanding networking and systems" "tags" (slice "Networking" "Linux" "Projects"))
-      (dict "icon" "🔐" "period" "2020 - 2021" "title" "Going Deeper" "desc" "Dived into cybersecurity, earned first certifications and joined the industry" "tags" (slice "Cybersecurity" "Certifications" "IT Support"))
-      (dict "icon" "🚀" "period" "2022 - 2023" "title" "Level Up" "desc" "Took on bigger responsibilities, worked on enterprise infrastructure projects" "tags" (slice "Enterprise IT" "vSphere" "CyberArk"))
-      (dict "icon" "⚡" "period" "2024 - Present" "title" "Present Day" "desc" "Currently working at Isolutions Associates, building and securing tech systems" "tags" (slice "Isolutions" "Innovation" "Growth"))
+      (dict "icon" "🌱" "period" "2018 - 2019" "title" "The Beginning" "desc" "Discovered my passion for technology. Started learning programming basics and fell in love with how computers work. Interacting with computer and teminal" "tags" (slice "Python" "HTML" "Curiosity"))
+      (dict "icon" "💻" "period" "2019 - 2020" "title" "First Steps" "desc" "Built my first projects sellint to my fellow students, and started understanding networking and systems. Realized cybersecurity was my calling." "tags" (slice "Networking" "Linux" "Projects"))
+      (dict "icon" "🔐" "period" "2020 - 2021" "title" "Going Deeper" "desc" "Dived into cybersecurity, earned first certifications and joined the industry. Also worked with Newtworking devices, deployed few Networking Projects" "tags" (slice "Cybersecurity" "Networking" "Certifications" "CTF"))
+      (dict "icon" "🚀" "period" "2022 - 2023" "title" "Level Up" "desc" "Took on bigger responsibilities. Worked on enterprise infrastructure, structured cabling, Network Security, Firewall Configuration, Routers and Switches configurations, Worked with different CPE Equipments while securing them too." "tags" (slice "Enterprise IT" "vSphere" "IDsec"))
+      (dict "icon" "🧑‍💻" "period" "2024 - Present" "title" "Present Day" "desc" "Ethical Hacker, CTF Player and Network Engineer at root, Breaking things legally. Building things securely." "tags" (slice "Ethical Hacking" "Innovation" "Growth"))
     }}
-
     {{ range $items }}
     <div style="position:relative;margin-bottom:40px;">
       <div style="position:absolute;left:-52px;width:28px;height:28px;background:#1a1a2e;border:2px solid #667eea;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;">{{ .icon }}</div>
-      <div style="background:#1a1a2e;border:1px solid #333;border-radius:12px;padding:20px 25px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <div style="background:#1a1a2e;border:1px solid #333;border-radius:12px;padding:20px 25px;transition:all 0.3s;" onmouseover="this.style.borderColor='#667eea'" onmouseout="this.style.borderColor='#333'">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
           <h3 style="color:#667eea;margin:0;">{{ .title }}</h3>
           <span style="color:#764ba2;font-size:0.85rem;">{{ .period }}</span>
         </div>
-        <p style="color:#ccc;margin:0 0 12px;">{{ .desc }}</p>
+        <p style="color:#ccc;margin:0 0 12px;line-height:1.7;font-size:0.9rem;">{{ .desc }}</p>
         <div style="display:flex;flex-wrap:wrap;gap:8px;">
           {{ range .tags }}
           <span style="padding:4px 12px;background:#2a2a4e;color:#667eea;border-radius:20px;font-size:0.78rem;">{{ . }}</span>
@@ -30,7 +27,6 @@
       </div>
     </div>
     {{ end }}
-
   </div>
 </div>
 {{ end }}
