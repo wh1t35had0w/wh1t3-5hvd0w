@@ -20,7 +20,7 @@ My mission is simple, **make the digital world harder to compromise**. I believe
 
 **Networking**: Network Engineering, Infrastructure Design, Firewall Configuration, TCP/IP
 
-**Identity Security**: CyberArk, Identity and Access Management, Privileged Access
+**Identity Security**: IGA, IAM, Privileged Access
 
 **Infrastructure**: VMware vSphere, Virtualisation, System Administration, IT Support
 
