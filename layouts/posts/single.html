@@ -1,37 +1,22 @@
 {{ define "main" }}
 <div style="max-width:860px;margin:60px auto;padding:0 20px;">
   <div style="background:#1a1a2e;border:1px solid #2a2a4e;border-radius:14px;overflow:hidden;">
-
-    <!-- Terminal top bar -->
-    <div style="background:#0d1117;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #2a2a4e;">
-      <span style="width:12px;height:12px;border-radius:50%;background:#ff5f57;display:inline-block;"></span>
-      <span style="width:12px;height:12px;border-radius:50%;background:#febc2e;display:inline-block;"></span>
-  GNU nano 8.7                                                                                                               layouts/posts/single.html
     <div style="background:#0d1117;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #2a2a4e;">
       <span style="width:12px;height:12px;border-radius:50%;background:#ff5f57;display:inline-block;"></span>
       <span style="width:12px;height:12px;border-radius:50%;background:#febc2e;display:inline-block;"></span>
       <span style="width:12px;height:12px;border-radius:50%;background:#28c840;display:inline-block;"></span>
       <span style="font-family:monospace;font-size:0.8rem;color:#666;margin-left:8px;">{{ .Title }}.md</span>
     </div>
-
     <div style="padding:28px 32px;font-family:monospace;">
-
-      <!-- Cover Image BEFORE the cat command -->
       {{ with .Params.image }}
-      <img src="{{ $.Site.BaseURL }}{{ . | strings.TrimPrefix "/" }}" style="width:100%;max-height:340px;object-fit:cover;border-radius:10px;margin-bottom:24px;" />
+      <img src="{{ . | relURL }}" style="width:100%;max-height:340px;object-fit:cover;border-radius:10px;margin-bottom:24px;" />
       {{ end }}
-
-      <!-- cat command -->
       <p style="color:#00ff88;margin:0 0 24px;">$ cat {{ .Title | lower | replaceRE " " "-" }}.md</p>
-
-      <!-- Title -->
       <h1 style="color:#667eea;font-size:1.6rem;margin:0 0 12px;line-height:1.3;">{{ .Title }}</h1>
-
-      <!-- Meta -->
       <div style="display:flex;align-items:center;gap:14px;font-size:0.78rem;color:#6b7280;margin-bottom:24px;flex-wrap:wrap;">
-        <span> ~E {{ .Date.Forma"January 2, 2006"6" </span>n>
-        <span> ~D {{ .WordCount }} wor</span>n>
-        <span>⏱ {{ div .WordCount 200 }} min read</span>
+        <span style="display:flex;align-items:center;gap:5px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>{{ .Date.Format "January 2, 2006" }}</span>
+        <span style="display:flex;align-items:center;gap:5px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>{{ .WordCount }} words</span>
+        <span style="display:flex;align-items:center;gap:5px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>{{ div .WordCount 200 }} min</span>
         {{ with .Params.tags }}
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           {{ range . }}
@@ -40,26 +25,20 @@
         </div>
         {{ end }}
       </div>
-
-      <!-- Blog Content -->
       <div style="color:#ccc;line-height:1.9;font-size:0.92rem;" class="blog-content">
         {{ .Content }}
       </div>
-
-      <!-- Back Button -->
       <div style="margin-top:40px;padding-top:20px;border-top:1px solid #2a2a4e;">
-        <a href="{{ .Site.BaseURL }}posts/" style="font-family:monospace;color:#00ff88;text-decoration:none;font-size:0.85rem;">← cd /posts</a>
+        <a href="{{ .Site.BaseURL }}posts/" style="font-family:monospace;color:#00ff88;text-decoration:none;font-size:0.85rem;">cd /posts</a>
       </div>
-
     </div>
   </div>
 </div>
-
 <style>
 .blog-content h1 { color:#667eea; font-size:1.4rem; margin:28px 0 12px; }
 .blog-content h2 { color:#00ff88; font-size:1.2rem; margin:28px 0 10px; }
 .blog-content h3 { color:#a78bfa; font-size:1rem; margin:20px 0 8px; }
-.blog-content p  { margin-bottom:16px; }
+.blog-content p { margin-bottom:16px; }
 .blog-content strong { color:#a78bfa; }
 .blog-content a { color:#667eea; }
 .blog-content ul, .blog-content ol { padding-left:20px; margin-bottom:14px; }
@@ -67,57 +46,6 @@
 .blog-content code { background:#0d1117; color:#00ff88; padding:2px 8px; border-radius:4px; font-size:0.85rem; }
 .blog-content pre { background:#0d1117; border:1px solid #1e2a3a; border-radius:8px; padding:16px; overflow-x:auto; margin:16px 0; }
 .blog-content pre code { background:none; padding:0; color:#00ff88; }
-
-/* Kill any floating TOC from theme */
 #TableOfContents { display:none !important; }
 </style>
-
-{{ end }}
-
-
-      <span style="width:12px;height:12px;border-radius:50%;background:#28c840;display:inline-block;"></span>
-      <span style="font-family:monospace;font-size:0.8rem;color:#666;margin-left:8px;">{{ .Title }}.md</span>
-    </div>
-
-    <div style="padding:28px 32px;font-family:monospace;">
-
-      <!-- Cover Image BEFORE the cat command -->
-      {{ with .Params.image }}
-      <img src="{{ $.Site.BaseURL }}{{ . | strings.TrimPrefix "/" }}" style="width:100%;max-height:340px;object-fit:cover;border-radius:10px;margin-bottom:24px;" />
-      {{ end }}
-
-      <!-- cat command -->
-      <p style="color:#00ff88;margin:0 0 24px;">$ cat {{ .Title | lower | replaceRE " " "-" }}.md</p>
-
-      <!-- Title -->
-      <h1 style="color:#667eea;font-size:1.6rem;margin:0 0 12px;line-height:1.3;">{{ .Title }}</h1>
-
-      <!-- Meta -->
-      <div style="display:flex;align-items:center;gap:14px;font-size:0.78rem;color:#6b7280;margin-bottom:24px;flex-wrap:wrap;">
-        <span style="display:flex;align-items:center;gap:5px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>{{ .Date.Format "January 2, 2006" }}</span>
-	<span style="display:flex;align-items:center;gap:5px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>{{ .WordCount }} words</span>
-	<span style="display:flex;align-items:center;gap:5px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>{{ div .WordCount 200 }} min</span>
-        {{ with .Params.tags }}
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          {{ range . }}
-          <span style="padding:3px 10px;background:#0d1117;color:#aaa;border-radius:4px;font-size:0.72rem;">{{ . }}</span>
-          {{ end }}
-        </div>
-        {{ end }}
-      </div>
-
-      <!-- Blog Content -->
-      <div style="color:#ccc;line-height:1.9;font-size:0.92rem;" class="blog-content">
-        {{ .Content }}
-      </div>
-
-      <!-- Back Button -->
-      <div style="margin-top:40px;padding-top:20px;border-top:1px solid #2a2a4e;">
-        <a href="{{ .Site.BaseURL }}posts/" style="font-family:monospace;color:#00ff88;text-decoration:none;font-size:0.85rem;">← cd /posts</a>
-      </div>
-
-    </div>
-  </div>
-</div>
-
 {{ end }}
