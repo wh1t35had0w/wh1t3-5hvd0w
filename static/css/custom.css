@@ -148,3 +148,10 @@ nav#TableOfContents,
 #TableOfContents a:hover {
   color: #667eea !important;
 }
+
+/* Force logo to white */
+.logo {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  background: none !important;
+}
