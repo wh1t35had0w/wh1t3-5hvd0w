@@ -14,7 +14,7 @@
 
       <!-- Cover Image BEFORE the cat command -->
       {{ with .Params.image }}
-      <img src="{{ . }}" style="width:100%;max-height:340px;object-fit:cover;border-radius:10px;margin-bottom:24px;" />
+      <img src="{{ $.Site.BaseURL }}{{ . | strings.TrimPrefix "/" }}" style="width:100%;max-height:340px;object-fit:cover;border-radius:10px;margin-bottom:24px;" />
       {{ end }}
 
       <!-- cat command -->
