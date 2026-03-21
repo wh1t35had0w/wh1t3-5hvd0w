@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Wh1t35shvd0w</title>
-    <link>https://wh1t35had0w.github.io/wh1t3-5hvd0w/tags/</link>
+    <link>http://localhost:1313/wh1t3-5hvd0w/tags/</link>
     <description>Recent content in Tags on Wh1t35shvd0w</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 21 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://wh1t35had0w.github.io/wh1t3-5hvd0w/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/wh1t3-5hvd0w/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Devops</title>
-      <link>https://wh1t35had0w.github.io/wh1t3-5hvd0w/tags/devops/</link>
+      <link>http://localhost:1313/wh1t3-5hvd0w/tags/devops/</link>
       <pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://wh1t35had0w.github.io/wh1t3-5hvd0w/tags/devops/</guid>
+      <guid>http://localhost:1313/wh1t3-5hvd0w/tags/devops/</guid>
       <description></description>
     </item>
     <item>
       <title>Github</title>
-      <link>https://wh1t35had0w.github.io/wh1t3-5hvd0w/tags/github/</link>
+      <link>http://localhost:1313/wh1t3-5hvd0w/tags/github/</link>
       <pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://wh1t35had0w.github.io/wh1t3-5hvd0w/tags/github/</guid>
+      <guid>http://localhost:1313/wh1t3-5hvd0w/tags/github/</guid>
       <description></description>
     </item>
     <item>
       <title>Hugo</title>
-      <link>https://wh1t35had0w.github.io/wh1t3-5hvd0w/tags/hugo/</link>
+      <link>http://localhost:1313/wh1t3-5hvd0w/tags/hugo/</link>
       <pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://wh1t35had0w.github.io/wh1t3-5hvd0w/tags/hugo/</guid>
+      <guid>http://localhost:1313/wh1t3-5hvd0w/tags/hugo/</guid>
       <description></description>
     </item>
     <item>
       <title>Tutorial</title>
-      <link>https://wh1t35had0w.github.io/wh1t3-5hvd0w/tags/tutorial/</link>
+      <link>http://localhost:1313/wh1t3-5hvd0w/tags/tutorial/</link>
       <pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://wh1t35had0w.github.io/wh1t3-5hvd0w/tags/tutorial/</guid>
+      <guid>http://localhost:1313/wh1t3-5hvd0w/tags/tutorial/</guid>
       <description></description>
     </item>
   </channel>
