@@ -4,7 +4,7 @@ date: 2026-03-21
 draft: false
 tags: ["hugo", "github", "devops", "tutorial"]
 description: "A step by step guide on how I built and deployed this blog using Hugo and GitHub Pages — from zero to live in under an hour."
-image: "/images/hugo-blog.png"
+image: "images/hugo-blog.png"
 ---
 
 So you want a blog. Not just any blog — a fast, free, fully custom one that you actually own.
