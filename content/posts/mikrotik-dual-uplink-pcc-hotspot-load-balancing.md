@@ -1,5 +1,5 @@
 ---
-title: "How I Built a MikroTik Dual-Uplink PCC Load Balancing Network with HotSpot"
+title: "How I Built a MikroTik Dual-Uplink PCC Load Balancing Network RADIUS server enabled"
 date: 2026-09-20
 draft: false
 tags: ["mikrotik", "routeros", "pcc", "load-balancing", "hotspot", "networking", "failover", "wifi"]
