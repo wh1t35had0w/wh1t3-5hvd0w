@@ -1,9 +1,22 @@
-title: "How I Built a MikroTik Dual-Uplink PCC Load Balancing Network with HotSpot"
+---
+title: "MikroTik Dual-Uplink PCC HotSpot: Complete Deployment & Troubleshooting Guide"
 date: 2026-09-20
 draft: false
-tags: ["mikrotik", "routeros", "pcc", "load-balancing", "hotspot", "networking", "failover", "wifi"]
-description: "An in-depth, reusable guide for deploying a MikroTik RouterOS 7 dual-uplink PCC load-balancing network with recursive failover, HotSpot, NAT, policy routing, and multiple access points."
-image: "https://wh1t35had0w.github.io/wh1t3-5hvd0w/images/mikrotik-dual-uplink-pcc-architecture.png"
+cover:
+    image: "/wh1t3-5hvd0w/images/mikrotik-dual-uplink-pcc-architecture.png"
+    alt: "MikroTik dual-uplink PCC HotSpot network architecture"
+    caption: "Dual-uplink MikroTik PCC architecture with HotSpot and multiple access points"
+    relative: false
+tags:
+    - MikroTik
+    - PCC
+    - HotSpot
+    - Dual WAN
+    - Load Balancing
+    - Networking
+categories:
+    - Networking
+---
 
 This is the complete runbook for a MikroTik dual-uplink network using **PCC (Per Connection Classifier)**, automatic failover, HotSpot authentication, NAT and multiple wireless access points.
 
