@@ -1,21 +1,10 @@
 ---
-title: "MikroTik Dual-Uplink PCC HotSpot: Complete Deployment & Troubleshooting Guide"
+title: "How I Built a MikroTik Dual-Uplink PCC Load Balancing Network with HotSpot"
 date: 2026-09-20
 draft: false
-cover:
-    image: "/wh1t3-5hvd0w/images/mikrotik-dual-uplink-pcc-architecture.png"
-    alt: "MikroTik dual-uplink PCC HotSpot network architecture"
-    caption: "Dual-uplink MikroTik PCC architecture with HotSpot and multiple access points"
-    relative: false
-tags:
-    - MikroTik
-    - PCC
-    - HotSpot
-    - Dual WAN
-    - Load Balancing
-    - Networking
-categories:
-    - Networking
+tags: ["mikrotik", "routeros", "pcc", "load-balancing", "hotspot", "networking", "failover", "wifi"]
+description: "An in-depth, reusable guide for deploying a MikroTik RouterOS 7 dual-uplink PCC load-balancing network with recursive failover, HotSpot, NAT, policy routing, and multiple access points."
+image: "https://wh1t35had0w.github.io/wh1t3-5hvd0w/images/mikrotik-dual-uplink-pcc-architecture.png"
 ---
 
 This is the complete runbook for a MikroTik dual-uplink network using **PCC (Per Connection Classifier)**, automatic failover, HotSpot authentication, NAT and multiple wireless access points.
@@ -80,6 +69,8 @@ Internet / Uplink 2    │
                  Client Devices
 ```
 
+---
+
 ## Reference Deployment
 
 The following values are from the working reference deployment. For another site, treat them as variables rather than values that must be copied blindly.
@@ -120,8 +111,9 @@ The reference architecture uses:
 
 The Tenda devices are only examples of upstream equipment. The same MikroTik configuration can be used when the upstream connections come from different routers, ONTs, modems or other Ethernet handoffs.
 
+---
 
-# Part 1 - Plan the Network Before Touching the Router
+# Part 1 — Plan the Network Before Touching the Router
 
 The most important lesson from this deployment is to define the roles first.
 
@@ -150,9 +142,11 @@ For a larger deployment, also document:
 - Monitoring requirements
 - Backup and rollback procedure
 
-# Part 2 - Prepare the MikroTik
+---
 
-## Step 1 - Confirm RouterOS Version
+# Part 2 — Prepare the MikroTik
+
+## Step 1 — Confirm RouterOS Version
 
 Start by checking the RouterOS version:
 
@@ -174,7 +168,9 @@ Do not skip the backup.
 
 A configuration that works on one router should never be treated as a reason to remove the ability to roll back.
 
-# Part 3 - Identify the Interfaces
+---
+
+# Part 3 — Identify the Interfaces
 
 Before configuring PCC, identify exactly which ports are connected to each uplink.
 
@@ -200,7 +196,9 @@ Uplink 2
 
 This makes the configuration easier to reuse at another site.
 
-# Part 4 - Configure Uplink 1 and Uplink 2
+---
+
+# Part 4 — Configure Uplink 1 and Uplink 2
 
 The upstream devices provide DHCP addresses to the MikroTik.
 
@@ -268,7 +266,7 @@ Failover             → backup route
 
 ---
 
-# Part 5 -  Put the WAN Interfaces in a WAN Interface List
+# Part 5 — Put the WAN Interfaces in a WAN Interface List
 
 Interface lists make firewall and NAT rules much easier to maintain.
 
@@ -291,7 +289,9 @@ WAN → ether1
 WAN → ether2
 ```
 
-# Part 6 - Test Each Uplink Before PCC
+---
+
+# Part 6 — Test Each Uplink Before PCC
 
 Do not continue until both uplinks work independently.
 
@@ -338,7 +338,7 @@ PCC distributes connections. It does not repair a broken upstream connection.
 
 ---
 
-# Part 7 - Create the PCC Bypass Address List
+# Part 7 — Create the PCC Bypass Address List
 
 Some destinations should not be pushed through the PCC policy-routing logic.
 
@@ -370,7 +370,9 @@ If VPN networks or management networks exist, add them deliberately.
 
 Do not copy unrelated private networks from this example into another deployment unless they actually exist there.
 
-# Part 8 - Create Policy Routing Tables
+---
+
+# Part 8 — Create Policy Routing Tables
 
 RouterOS 7 uses routing tables for policy routing.
 
@@ -395,7 +397,9 @@ TO-UPLINK1
 TO-UPLINK2
 ```
 
-# Part 9 - Build Recursive Health Checks
+---
+
+# Part 9 — Build Recursive Health Checks
 
 A common mistake is checking only whether the physical gateway responds.
 
@@ -418,7 +422,9 @@ add dst-address=8.8.8.8/32 gateway=192.168.101.1%ether2 check-gateway=ping comme
 
 These routes make the probe destinations reachable through the intended uplinks.
 
-# Part 10 - Create the Main Failover Routes
+---
+
+# Part 10 — Create the Main Failover Routes
 
 The main routing table should have a primary path and a backup path.
 
@@ -447,7 +453,9 @@ The exact recursive-route implementation should be checked with:
 
 The important result is that the primary route becomes inactive when its monitored path fails and the backup route becomes active.
 
-# Part 11 - Create the Policy Routes
+---
+
+# Part 11 — Create the Policy Routes
 
 Each PCC routing table needs a preferred uplink and a backup uplink.
 
@@ -478,7 +486,9 @@ The purpose is connection preservation.
 
 A connection marked for Uplink 1 should normally leave through Uplink 1. If Uplink 1 fails, the policy table must still have a usable backup path.
 
-# Part 12 - Understand PCC Before Creating the Mangle Rules
+---
+
+# Part 12 — Understand PCC Before Creating the Mangle Rules
 
 PCC does not combine two Internet connections into one single TCP connection.
 
@@ -515,7 +525,9 @@ It is appropriate for a reference environment where Uplink 1 is approximately 40
 
 For a different bandwidth ratio, change the bucket design.
 
-# Part 13 - PCC Connection Marking
+---
+
+# Part 13 — PCC Connection Marking
 
 The most important principle is:
 
@@ -577,9 +589,11 @@ Once the connection receives a connection mark, subsequent packets should follow
 
 This prevents the same connection from bouncing between uplinks.
 
-# Part 14 - Mark the Routing Table
+---
 
-After marking the connection, convert the connection mark into a routing mark.
+# Part 14 — Mark the Routing Table
+
+After connection marking, convert the connection mark into a routing mark.
 
 ```routeros
 /ip firewall mangle
@@ -598,9 +612,11 @@ add chain=prerouting action=mark-routing \
     comment="Route marked connections via Uplink 2"
 ```
 
-`passthrough=no` is useful here because once the packet has received its routing decision, it normally has no reason to continue through unrelated mangle rules in that chain.
+`passthrough=no` is useful here because once the packet has received its routing decision, there is normally no reason for it to continue through unrelated mangle rules in that chain.
 
-# Part 15 - PPPoE and Other Special Traffic
+---
+
+# Part 15 — PPPoE and Other Special Traffic
 
 If PPPoE subscribers, VPNs or management networks share the same router, they should not automatically be treated like HotSpot client traffic.
 
@@ -628,7 +644,9 @@ The exact PPP profiles and pools depend on the deployment.
 
 The important design principle is to keep subscriber traffic separate from HotSpot PCC rules when the two services require different routing behavior.
 
-# Part 16 - HotSpot Integration
+---
+
+# Part 16 — HotSpot Integration
 
 This is where the deployment became more interesting.
 
@@ -654,7 +672,9 @@ HotSpot creates rules for things such as:
 
 Therefore, PCC must be integrated with the HotSpot processing path instead of treating HotSpot as an ordinary LAN interface.
 
-# Part 17 - Configure the HotSpot Network
+---
+
+# Part 17 — Configure the HotSpot Network
 
 The reference HotSpot gateway is:
 
@@ -689,9 +709,12 @@ Verify:
 /ip hotspot print detail
 /ip pool print
 ```
-# Part 18 - HotSpot Local Gateway Bypass
 
-One of the troubleshooting discoveries in the reference deployment was that the Hotspot gateway itself must not be incorrectly pushed into PCC policy routing.
+---
+
+# Part 18 — HotSpot Local Gateway Bypass
+
+One of the troubleshooting discoveries in the reference deployment was that the HotSpot gateway itself must not be incorrectly pushed into PCC policy routing.
 
 The bypass rule is:
 
@@ -720,7 +743,9 @@ You should see the local gateway bypass before the PCC marking rules.
 
 This prevents traffic destined for the router itself, such as the HotSpot gateway, from being incorrectly treated as Internet-bound PCC traffic.
 
-# Part 19 - The HotSpot `pre-hotspot` Fix
+---
+
+# Part 19 — The HotSpot `pre-hotspot` Fix
 
 The most important HotSpot/PCC fix in the reference deployment was an explicit accept rule in the HotSpot `pre-hotspot` chain:
 
@@ -760,7 +785,9 @@ Verify it with:
 
 If the counter increases while authenticated clients browse the Internet, the rule is being used.
 
-# Part 20 - NAT and Masquerade
+---
+
+# Part 20 — NAT and Masquerade
 
 The WAN-facing masquerade rule should cover both uplinks.
 
@@ -781,7 +808,9 @@ The reference deployment also contained explicit masquerade rules for several in
 
 When creating a new deployment, do not blindly reproduce those additional subnet-specific rules. First determine whether the general WAN masquerade already covers the required traffic.
 
-# Part 21 - Firewall Considerations
+---
+
+# Part 21 — Firewall Considerations
 
 The firewall must protect the router without blocking legitimate HotSpot or NAT traffic.
 
@@ -800,6 +829,8 @@ A key WAN protection rule in the reference environment was:
 The rule prevents new unsolicited connections arriving from the Internet unless they are part of an intentional destination-NAT flow.
 
 Do not remove established/related rules, HotSpot dynamic rules or service-specific exceptions simply because the PCC configuration is being changed.
+
+---
 
 # Part 22 — Do Not Enable FastTrack Blindly
 
@@ -820,7 +851,9 @@ Before enabling FastTrack in a similar deployment, test:
 
 If policy routing is central to the architecture, leave FastTrack disabled until you have validated the complete traffic path.
 
-# Part 23 - Verify the HotSpot Dynamic Rules
+---
+
+# Part 23 — Verify the HotSpot Dynamic Rules
 
 Once HotSpot is enabled, RouterOS creates dynamic firewall and NAT rules.
 
@@ -846,8 +879,9 @@ The exact rule numbers can change.
 
 Do not document rule numbers as permanent identifiers. Use comments, chain names and conditions instead.
 
+---
 
-# Part 24 - Test the Router Before Testing Clients
+# Part 24 — Test the Router Before Testing Clients
 
 Always separate **router health** from **client health**.
 
@@ -873,7 +907,9 @@ That distinction is important.
 
 If the router can reach the Internet but HotSpot clients cannot, stop troubleshooting the physical WAN connection and inspect HotSpot, mangle, NAT and firewall processing.
 
-# Part 25 - Verify PCC Counters
+---
+
+# Part 25 — Verify PCC Counters
 
 PCC counters are one of the fastest ways to determine whether the classifier is actually receiving traffic.
 
@@ -895,7 +931,9 @@ The reference deployment showed active counters on all three PCC buckets.
 
 That means new connections were being distributed across both uplinks.
 
-# Part 26 - Verify Routing-Mark Counters
+---
+
+# Part 26 — Verify Routing-Mark Counters
 
 Next check the route-marking rules:
 
@@ -932,7 +970,9 @@ Connection tracking shows replies
 End-to-end traffic is returning
 ```
 
-# Part 27 - Verify Connection Tracking
+---
+
+# Part 27 — Verify Connection Tracking
 
 For HotSpot clients, inspect active connections:
 
@@ -954,11 +994,13 @@ The exact flags vary by protocol and connection state.
 
 The important point is that you should see real external destinations and returning traffic rather than only client-to-router connections.
 
-# Part 28 - Test an Actual HotSpot Client
+---
+
+# Part 28 — Test an Actual HotSpot Client
 
 Now test from a real phone or laptop.
 
-### Test 1 - Connect to Wi-Fi
+### Test 1 — Connect to Wi-Fi
 
 Confirm the client receives an address from the HotSpot network.
 
@@ -968,7 +1010,7 @@ For example:
 192.168.180.x
 ```
 
-### Test 2 - Confirm Gateway
+### Test 2 — Confirm Gateway
 
 The client should use:
 
@@ -976,23 +1018,23 @@ The client should use:
 192.168.180.1
 ```
 
-### Test 3 - Open the HotSpot Login
+### Test 3 — Open the HotSpot Login
 
 Verify the captive portal appears.
 
-### Test 4 - Authenticate
+### Test 4 — Authenticate
 
 Log in normally.
 
-### Test 5 - Browse
+### Test 5 — Browse
 
 Open several different websites.
 
-### Test 6 - Generate Multiple Connections
+### Test 6 — Generate Multiple Connections
 
 Use normal browsing, video, DNS requests and other traffic so that PCC has multiple connections to classify.
 
-### Test 7 - Watch the Router
+### Test 7 — Watch the Router
 
 At the same time, run:
 
@@ -1003,7 +1045,9 @@ At the same time, run:
 
 The counters should increase.
 
-# Part 29 - The HotSpot Disabled vs Enabled Test
+---
+
+# Part 29 — The HotSpot Disabled vs Enabled Test
 
 This is one of the most useful troubleshooting techniques in this deployment.
 
@@ -1039,7 +1083,9 @@ First verify:
 6. NAT counters.
 7. Connection tracking.
 
-# Part 30 - Troubleshooting Decision Tree
+---
+
+# Part 30 — Troubleshooting Decision Tree
 
 ## Problem: No Internet for everyone
 
@@ -1065,6 +1111,8 @@ If both uplinks fail, investigate the upstream devices or cabling.
 
 If only one fails, investigate that uplink independently.
 
+---
+
 ## Problem: Router has Internet, clients do not
 
 Check:
@@ -1077,6 +1125,8 @@ Check:
 ```
 
 Then inspect the HotSpot-specific rules.
+
+---
 
 ## Problem: HotSpot login works but authenticated users have no Internet
 
@@ -1096,6 +1146,9 @@ Then check its counter:
 ```routeros
 /ip firewall nat print stats where comment="PCC-HOTSPOT-AUTH-BYPASS"
 ```
+
+---
+
 ## Problem: Only one uplink receives traffic
 
 Check PCC counters:
@@ -1113,6 +1166,8 @@ If one or more classifier buckets remain at zero:
 - Confirm the traffic is not in `PCC-BYPASS`.
 - Confirm the rule order.
 
+---
+
 ## Problem: PCC works but websites randomly fail
 
 Investigate asymmetric routing and connection stickiness.
@@ -1129,6 +1184,8 @@ Check:
 
 Also verify that both policy tables have working routes.
 
+---
+
 ## Problem: HotSpot gateway does not respond correctly
 
 Check the local gateway bypass:
@@ -1144,6 +1201,8 @@ HOTSPOT - bypass PCC for local gateway
 ```
 
 It should be before the PCC connection-marking rules.
+
+---
 
 ## Problem: NAT appears correct but clients still cannot browse
 
@@ -1162,7 +1221,9 @@ If connections are created but no replies return, inspect:
 - Connection marks
 - Firewall drops
 
-# Part 31 - Failover Testing
+---
+
+# Part 31 — Failover Testing
 
 Failover should be tested deliberately before calling the deployment production-ready.
 
@@ -1211,7 +1272,9 @@ Upstream router failure
 
 This is why recursive health checking is useful.
 
-# Part 32 - Test PCC After Failover
+---
+
+# Part 32 — Test PCC After Failover
 
 After restoring both uplinks, verify that PCC resumes normal distribution.
 
@@ -1224,6 +1287,8 @@ Generate new client traffic and watch the three PCC buckets.
 Existing connections may remain on their original path. Do not interpret that as a PCC failure.
 
 PCC is primarily concerned with assigning **new connections**.
+
+---
 
 # Part 33 — DNS Verification
 
@@ -1245,7 +1310,9 @@ A successful hostname ping demonstrates that the router can resolve the hostname
 
 Do not assume that a single `/resolve` command with a specific server proves the entire client DNS path is broken or working. Test the actual client path as well.
 
-# Part 34 - Access Point Design
+---
+
+# Part 34 — Access Point Design
 
 The access points are downstream of the MikroTik.
 
@@ -1274,7 +1341,9 @@ For a larger deployment, expand the switch and AP count without changing the cen
 
 The key requirement is that client traffic eventually reaches the HotSpot bridge/interface where the MikroTik can authenticate and route it.
 
-# Part 35 - Scaling This Design
+---
+
+# Part 35 — Scaling This Design
 
 The reference configuration was built on a small router and eight access points, but the architecture is intended to be reusable.
 
@@ -1319,7 +1388,9 @@ A `/22` was used in the reference deployment.
 
 For a larger site, select the subnet based on the expected number of clients and network design rather than copying `/22` automatically.
 
-# Part 36 - Monitoring the Deployment
+---
+
+# Part 36 — Monitoring the Deployment
 
 At minimum, monitor:
 
@@ -1354,8 +1425,9 @@ Useful commands include:
 
 For a production environment, these values should eventually feed a monitoring or observability platform rather than relying exclusively on manual CLI checks.
 
+---
 
-# Part 37 - Backup Strategy
+# Part 37 — Backup Strategy
 
 Do not rely on one backup.
 
@@ -1379,8 +1451,9 @@ The text export is useful for documentation and migration.
 
 The binary backup is useful for restoring the router configuration on compatible hardware and RouterOS conditions.
 
+---
 
-# Part 38 - Production Change Checklist
+# Part 38 — Production Change Checklist
 
 Before declaring the configuration complete:
 
@@ -1412,7 +1485,9 @@ Before declaring the configuration complete:
 
 Only after all of these checks should the deployment be treated as validated.
 
-# Part 39 - A Reusable Deployment Workflow
+---
+
+# Part 39 — A Reusable Deployment Workflow
 
 For the next large deployment, I would use this exact order:
 
@@ -1453,7 +1528,9 @@ For the next large deployment, I would use this exact order:
 
 The order matters because every stage gives you a known-good checkpoint before the next layer is introduced.
 
-# Part 40 - Read-Only Health Check Script
+---
+
+# Part 40 — Read-Only Health Check Script
 
 For future deployments, I use a separate verification script instead of immediately changing configuration.
 
@@ -1523,8 +1600,9 @@ This script deliberately does not modify the router.
 
 That makes it suitable for first-pass troubleshooting.
 
+---
 
-# Part 41 - Do Not Build a Blind One-Click Production Script
+# Part 41 — Do Not Build a Blind One-Click Production Script
 
 It is tempting to create one script that immediately creates every rule.
 
@@ -1552,7 +1630,9 @@ BACKUP AGAIN
 
 The automation should stop if a prerequisite is missing instead of assuming that the environment matches the reference deployment.
 
-# Part 42 - Recommended Variables for a Deployment Generator
+---
+
+# Part 42 — Recommended Variables for a Deployment Generator
 
 For a future automated installer, define the following variables at the top:
 
@@ -1581,8 +1661,9 @@ The generator can then create the RouterOS configuration from those variables.
 
 This is much safer than hard-coding one particular site into a script intended for a different large deployment.
 
+---
 
-# Part 43 - Known Issues Observed During the Reference Deployment
+# Part 43 — Known Issues Observed During the Reference Deployment
 
 ## Ethernet/PPPoE Link Flapping
 
@@ -1609,7 +1690,9 @@ Useful commands:
 
 A WAN load-balancing problem and a physically unstable downstream Ethernet link are two different troubleshooting problems.
 
-# Part 44 - What I Learned From the Troubleshooting
+---
+
+# Part 44 — What I Learned From the Troubleshooting
 
 The biggest lesson was that a network can look healthy at one layer and still fail at another.
 
@@ -1657,8 +1740,9 @@ Client
 
 Do not jump over layers.
 
+---
 
-# Part 45 - Final Architecture
+# Part 45 — Final Architecture
 
 The completed architecture looks like this:
 
@@ -1720,6 +1804,7 @@ HotSpot handles user access.
 
 NAT provides Internet translation.
 
+---
 
 # Final Verification Commands
 
@@ -1761,6 +1846,8 @@ Finally create the validated backup:
 /export file=FINAL-DUAL-UPLINK-PCC-HOTSPOT-VALIDATED
 /system backup save name=FINAL-DUAL-UPLINK-PCC-HOTSPOT-VALIDATED
 ```
+
+---
 
 # Conclusion
 
